@@ -65,30 +65,33 @@ const TicTacToe = () => {
   const isDraw = !winnerInfo && board.every((square) => square !== null);
   const statusText = getGameStatusText(winnerInfo, isDraw, isXNext);
 
-  return (
-    <div>
-      <h1>Tic-Tac-Toe</h1>
-      <div>{statusText}</div>
+return (
+  <div className="container">
+    <h1>Tic-Tac-Toe</h1>
+    <div className="status">{statusText}</div>
 
-      <div>
-        {board.map((mark, index) => {
-          const isWinningSquare = winnerInfo?.line.includes(index);
-          return (
-            <button
-              key={index}
-              onClick={() => handleSquareClick(index)}
-            >
-              {mark}
-            </button>
-          );
-        })}
-      </div>
+    <div className="board">
+      {board.map((mark, index) => {
+        const isWinningSquare = winnerInfo?.line?.includes(index);
 
-      <button onClick={restartGame}>
-        Restart Game
-      </button>
+        return (
+          <button
+            key={index}
+            className={`cell ${isWinningSquare ? "win" : ""}`}
+            onClick={() => handleSquareClick(index)}
+          >
+            {mark}
+          </button>
+        );
+      })}
     </div>
-  );
-};
+
+    <button className="restart" onClick={restartGame}>
+      Restart Game
+    </button>
+  </div>
+);
+}
+
 
 export default TicTacToe;
